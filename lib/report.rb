@@ -1,43 +1,31 @@
 require 'erb'
 
-def get_template()
-  %{
-        <DOCTYPE html  "-//W3C//DTD  1.0 //EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-            <title>Git HealthCheck Report</title>
-        </head>
-        <body>
-                 <h1>Git HealthCheck Report</h1>
-        </body>
-        </html>
-  }
-end
-
 class Report
 
-  include ERB::Util
-
-  def initialize(template)
-    @template = template
+  def initialize(fast_history, fast_working_copy, thorough_history)
+    @fast_history = fast_history
+    @fast_working_copy = fast_working_copy
+    @thorough_history = thorough_history
+    @report_directory = "#{File.dirname(__FILE__)}/../report"
   end
 
-  def render()
-    ERB.new(@template).result(binding)
+  def get_binding
+    binding
   end
 
-  def save(file)
-    Dir.mkdir 'report' unless File.directory? 'report'
-    File.open("report/#{file}", "w+") do |f|
-      f.write(render)
+  def get_template
+    File.read("#@report_directory/report.erb")
+  end
+
+  def create
+    rhtml = ERB.new(get_template)
+    output = rhtml.result(get_binding)
+
+    Dir.mkdir @report_directory unless File.directory? @report_directory
+
+    File.open("#@report_directory/report.html", "w+") do |f|
+      f.write output
     end
   end
-
-  list = Report.new(get_template)
-  list.save('report.html')
-
 
 end
