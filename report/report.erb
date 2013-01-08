@@ -51,28 +51,27 @@
 
 <hr>
 
-<div id="fastfind">
-  <h2>History (Fast Find)</h2>
+<div id="workingcopy">
+
+  <h2>Working Copy</h2>
 
   <p>
-    <%= @fast_history %>
-  </p>
-
-  <h2>Working Copy (Fast Find)</h2>
-
-  <p>
-    <%= @fast_working_copy %>
+    <%= @working_copy %>
   </p>
 
 </div>
 
 <hr>
 
-<div id="thorough">
-  <h2>History (Thorough Find)</h2>
+<div id="history">
+  <h2>History</h2>
+
+  <p>This metric provides a thorough assessment of your repository's history by identifying the largest files
+    (with a configurable threshold that defaults at 0.5 MB) that have been committed historically <strong>but are
+    no longer part of the working copy</strong>.</p>
 
   <p>
-    <%= @thorough_history %>
+    <%= @history %>
   </p>
 </div>
 

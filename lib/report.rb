@@ -2,10 +2,9 @@ require 'erb'
 
 class Report
 
-  def initialize(fast_history, fast_working_copy, thorough_history)
-    @fast_history = fast_history
-    @fast_working_copy = fast_working_copy
-    @thorough_history = thorough_history
+  def initialize(working_copy, history)
+    @working_copy = working_copy
+    @history = history
     @report_directory = "#{File.dirname(__FILE__)}/../report"
   end
 
