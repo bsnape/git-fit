@@ -1,4 +1,4 @@
-class FastBigFileFinder
+class WorkingCopy
 
   MEGABYTE = 1000 ** 2
 

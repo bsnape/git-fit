@@ -2,7 +2,7 @@
 #
 # http://stackoverflow.com/questions/298314/find-files-in-git-repo-over-x-megabytes-that-dont-exist-in-head
 
-class BigFileFinder
+class History
 
   MEGABYTE = 1000 ** 2
 
