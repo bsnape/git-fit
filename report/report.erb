@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Git Health Check</title>
+
+  <style type="text/css">
+      html {
+      }
+
+      body {
+          background: none repeat scroll 0 0 #FFFFFF;
+          color: #000000;
+          font-family: tahoma, verdana, arial, sans-serif;
+          font-size: 82%;
+          line-height: 1.5em;
+          margin: 10px;
+          padding: 0;
+      }
+
+      a {
+          color: #0254D0;
+          text-decoration: none;
+      }
+
+      h1, h2, h3 {
+          color: #000000;
+          letter-spacing: 0;
+      }
+
+      h1 {
+          font-size: 24px;
+      }
+
+      h2 {
+          font-size: 18px;
+          margin: 0 27px 15px 0;
+          padding: 10px 0 2px;
+      }
+
+      h3 {
+          font-size: 16px;
+      }
+
+      #menu > a {
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+<h1>Git Health Check Report</h1>
+
+<hr>
+
+<div id="fastfind">
+  <h2>History (Fast Find)</h2>
+
+  <p>
+    <%= @fast_history %>
+  </p>
+
+  <h2>Working Copy (Fast Find)</h2>
+
+  <p>
+    <%= @fast_working_copy %>
+  </p>
+
+</div>
+
+<hr>
+
+<div id="thorough">
+  <h2>History (Thorough Find)</h2>
+
+  <p>
+    <%= @thorough_history %>
+  </p>
+</div>
+
+</body>
+</html>
