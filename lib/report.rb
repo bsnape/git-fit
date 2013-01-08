@@ -6,6 +6,7 @@ class Report
     @working_copy = working_copy
     @history = history
     @report_directory = "#{File.dirname(__FILE__)}/../report"
+    @repository = Dir.pwd
   end
 
   def get_binding
