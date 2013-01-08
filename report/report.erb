@@ -11,7 +11,7 @@
           background: none repeat scroll 0 0 #FFFFFF;
           color: #000000;
           font-family: tahoma, verdana, arial, sans-serif;
-          font-size: 82%;
+          font-size: 87%;
           line-height: 1.5em;
           margin: 10px;
           padding: 0;
@@ -32,17 +32,21 @@
       }
 
       h2 {
-          font-size: 18px;
-          margin: 0 27px 15px 0;
-          padding: 10px 0 2px;
+          font-size: 20px;
+          margin: 10px 27px 15px 0;
+          padding: 20px 0 2px;
       }
 
       h3 {
           font-size: 16px;
       }
 
-      #menu > a {
-          font-weight: bold;
+      #history {
+          padding: 0 0 0 20px;
+      }
+
+      #working-copy {
+          padding: 0 0 0 20px;
       }
   </style>
 </head>
@@ -51,28 +55,31 @@
 
 <hr>
 
-<div id="workingcopy">
+<div id="repository-size">
 
-  <h2>Working Copy</h2>
+  <h2>Repository Size</h2>
 
-  <p>
-    <%= @working_copy %>
-  </p>
+  <div id="working-copy">
 
-</div>
+    <h3>Working Copy</h3>
 
-<hr>
+    <p>This metric inspects your repository's <a href="http://git-scm.com/book/en/Git-Internals-Packfiles">packfile</a>
+      contents via its index to identify the <em>n</em> (default 10) largest objects - and consequently the
+      <strong>largest files</strong> - in your working copy.</p> <br>
 
-<div id="history">
-  <h2>History</h2>
+    <p><%= @working_copy %></p>
 
-  <p>This metric provides a thorough assessment of your repository's history by identifying the largest files
-    (with a configurable threshold that defaults at 0.5 MB) that have been committed historically <strong>but are
-    no longer part of the working copy</strong>.</p>
+  </div>
 
-  <p>
-    <%= @history %>
-  </p>
+  <div id="history">
+    <h3>History</h3>
+
+    <p>This metric thoroughly inspects your repository's history and identifies the largest files over a configurable
+      threshold (defaults at 0.5 MB) that have been committed in the past <strong>but are
+      no longer part of the working copy</strong>.</p> <br>
+
+    <p><%= @history %></p>
+  </div>
 </div>
 
 </body>
