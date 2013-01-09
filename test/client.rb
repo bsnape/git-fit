@@ -1,13 +1,11 @@
-$:.unshift(File.dirname(__FILE__) + '/../lib')
-require 'history'
-require 'working_copy'
-require 'report'
+$LOAD_PATH.unshift File.dirname(__FILE__) + "/../lib"
 require 'ruport'
-require 'git_lib'
+require 'git-healthcheck'
 
 class Client
-  history = History.new('/Users/bensnape/git/dit_automation_tests', 'HEAD', 0.5)
-  working_copy = WorkingCopy.new '/Users/bensnape/git/dit_automation_tests'
+  repository = '/Users/bensnape/git/dit_automation_tests'
+  history = History.new(repository, 'HEAD', 0.5)
+  working_copy = WorkingCopy.new repository
 
   working_copy_output = working_copy.fast_find_in_working_copy
   history_output = history.search

@@ -24,10 +24,4 @@ class HealthCheck
                                                    # http://metalinguist.wordpress.com/2007/12/06/the-woes-of-git-gc-aggressive-and-how-git-deltas-work/
   end
 
-  def create_report(template)
-    report = Report.new(template)
-    report.save('report.html')
-
-  end
-
 end

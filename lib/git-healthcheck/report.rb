@@ -5,7 +5,7 @@ class Report
   def initialize(working_copy, history)
     @working_copy = working_copy
     @history = history
-    @report_directory = "#{File.dirname(__FILE__)}/../report"
+    @report_directory = File.dirname(__FILE__) + "/../../healthcheck"
     @repository = Dir.pwd
   end
 
@@ -14,7 +14,7 @@ class Report
   end
 
   def get_template
-    File.read("#@report_directory/report.erb")
+    File.read(File.dirname(__FILE__) + "/report/report.erb")
   end
 
   def create
@@ -23,7 +23,7 @@ class Report
 
     Dir.mkdir @report_directory unless File.directory? @report_directory
 
-    File.open("#@report_directory/report.html", "w+") do |f|
+    File.open(@report_directory + "/report.html", "w+") do |f|
       f.write output
     end
   end
