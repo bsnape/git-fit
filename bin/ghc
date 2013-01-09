@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'git-healthcheck'
+require 'git-health-check'
 
 GitHealthCheck::Cli::Application.new.execute
