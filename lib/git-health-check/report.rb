@@ -25,7 +25,6 @@ module GitHealthCheck
 
       Dir.mkdir @report_directory unless File.directory? @report_directory
 
-      puts @report_directory
       File.open(@report_directory + "/report.html", "w+") do |f|
         f.write output
       end
