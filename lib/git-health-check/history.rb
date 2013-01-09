@@ -11,6 +11,7 @@ module GitHealthCheck
       @head = head
       @threshold = threshold.to_f * MEGABYTE
       Dir.chdir repository
+      @git_lib = GitHealthCheck::GitLib.new repository
     end
 
     def search
@@ -30,21 +31,10 @@ module GitHealthCheck
       end
 
       big_files.map do |sha, (path, size, commit_sha)|
-        where = get_commit_details commit_sha
-        who = get_commit_author commit_sha
+        where = @git_lib.get_commit_details commit_sha
+        who = @git_lib.get_commit_author commit_sha
         [sha, size.to_f / MEGABYTE, path, where, who]
       end
-
-    end
-
-    private
-
-    def get_commit_author(commit_sha)
-      `git log #{commit_sha} -n 1 | grep Author | cut -f 2- -d ' '`.chomp
-    end
-
-    def get_commit_details(commit_sha)
-      `git show -s #{commit_sha} --format='%h: %cr'`.chomp
     end
 
   end
