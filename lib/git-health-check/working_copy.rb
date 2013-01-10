@@ -2,8 +2,6 @@ module GitHealthCheck
 
   class WorkingCopy
 
-    MEGABYTE = 1000 ** 2
-
     def initialize(repository)
       @repository = repository
       @git_lib = GitHealthCheck::GitLib.new repository
@@ -25,10 +23,13 @@ module GitHealthCheck
         # an empty path means you need to do a garbage collection
         next unless File.exist?("#@repository/#{path}")
 
-        # horrible regex because git verify-pack output can differ - http://www.kernel.org/pub/software/scm/git/docs/git-verify-pack.html
-        size, compressed_size = object.match(/\w+\s*\w+\s*(\w+)\s*(\w+)\s*\w+\s*\w+\s*\w+\s*/).captures.map { |c| (c.to_f / 1024).round 2 }
+        sha, type, size, size_in_pack, offset = object.split
 
-        test[sha] = [size, compressed_size, path]
+        # convert from byte to kilobyte
+        size = (size.to_f / 1024).round 2
+        size_in_pack = (size_in_pack.to_f / 1024).round 2
+
+        test[sha] = [size, size_in_pack, path]
       end
 
       test
