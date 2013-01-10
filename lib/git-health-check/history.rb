@@ -7,9 +7,9 @@ module GitHealthCheck
 
     MEGABYTE = 1000 ** 2
 
-    def initialize(repository, head = 'HEAD', threshold = 0.1) #0.1
+    def initialize(repository, head = 'HEAD', threshold = 0.1)
       @head = head
-      @threshold = threshold.to_f * MEGABYTE
+      @bytes_threshold = threshold.to_f * MEGABYTE
       Dir.chdir repository
       @git_lib = GitHealthCheck::GitLib.new repository
     end
@@ -25,7 +25,7 @@ module GitHealthCheck
           `git ls-tree -zrl #{commit.chomp!}`.split("\0").each do |object|
             bits, type, sha, size, path = object.split(/\s+/, 5)
             size = size.to_i
-            big_files[sha] = [path, size, commit] if size >= @threshold
+            big_files[sha] = [path, size, commit] if size >= @bytes_threshold
           end
         end
       end
