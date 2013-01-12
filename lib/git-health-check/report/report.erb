@@ -11,7 +11,7 @@
           background: none repeat scroll 0 0 #FFFFFF;
           color: #000000;
           font-family: tahoma, verdana, arial, sans-serif;
-          font-size: 87%;
+          font-size: 80%;
           line-height: 1.5em;
           margin: 10px;
           padding: 0;
@@ -54,6 +54,24 @@
 <h1>Git Health Check Report Summary for <%= @repository %></h1>
 
 <hr>
+
+<div id="packfile-stats">
+  <h2>Packfile Statistics</h2>
+  <ul>
+    <li><strong>Number of <a href="http://git-scm.com/book/en/Git-Internals-Git-Objects">objects</a> in
+      pack:</strong> <%= @packfile.pack_count[0] %></li>
+
+    <li><strong>Total packfile size: </strong><%= @packfile.size_of_pack[0] %>
+      <% if @packfile.size_of_pack[0].to_i >= 1073741824 %>
+          <%= 'gb' %>
+      <% elsif @packfile.size_of_pack[0].to_i >= 1048576 %>
+          <%= 'mb' %>
+      <% else %>
+          <%= 'kB' %>
+      <% end %>
+    </li>
+  </ul>
+</div>
 
 <div id="repository-size">
 
