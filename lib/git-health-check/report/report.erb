@@ -63,9 +63,9 @@
 
     <li><strong>Total packfile size: </strong><%= @packfile.size_of_pack[0] %>
       <% if @packfile.size_of_pack[0].to_i >= 1073741824 %>
-          <%= 'gb' %>
+          <%= 'GB' %>
       <% elsif @packfile.size_of_pack[0].to_i >= 1048576 %>
-          <%= 'mb' %>
+          <%= 'MB' %>
       <% else %>
           <%= 'kB' %>
       <% end %>

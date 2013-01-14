@@ -35,7 +35,7 @@ EOB
 
         @parser.on("-h", "--help", "Displays this help message") { @command_class = HelpCommand }
 
-        @parser.on("-t", "--threshold THRESHOLD", Float, "Specify history size threshold in mB (default 0.5)") do |n|
+        @parser.on("-t", "--threshold THRESHOLD", Float, "Specify history size threshold in MB (default 0.5)") do |n|
           @threshold = n
         end
       end

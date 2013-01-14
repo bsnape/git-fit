@@ -20,7 +20,7 @@ module GitHealthCheck
         working_copy_output = working_copy.fast_find_in_working_copy
         history_output = history.search
 
-        working_copy_report = Table("object sha", "size (KB)", "compressed (KB)", "path")
+        working_copy_report = Table("object sha", "size (kB)", "compressed (kB)", "path")
         history_report = Table("object sha", "size (MB)", "path", "commit details", "author")
 
         working_copy_output.each { |sha, (size, csize, path)| working_copy_report << [sha, size, csize, path] }
