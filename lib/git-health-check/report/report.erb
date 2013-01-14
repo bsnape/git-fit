@@ -61,13 +61,14 @@
     <li><strong>Number of <a href="http://git-scm.com/book/en/Git-Internals-Git-Objects">objects</a> in
       pack:</strong> <%= @packfile.pack_count[0] %></li>
 
-    <li><strong>Total packfile size: </strong><%= @packfile.size_of_pack[0] %>
-      <% if @packfile.size_of_pack[0].to_i >= 1073741824 %>
-          <%= 'GB' %>
-      <% elsif @packfile.size_of_pack[0].to_i >= 1048576 %>
-          <%= 'MB' %>
+    <li><strong>Total packfile size: </strong>
+      <% size = @packfile.size_of_pack[0].to_f %>
+      <% if size >= 1048576 %>
+          <%= size / 1048576 %> GB
+      <% elsif size >= 1024 %>
+          <%= size / 1024 %> MB
       <% else %>
-          <%= 'kB' %>
+          <%= size %> kB
       <% end %>
     </li>
   </ul>
