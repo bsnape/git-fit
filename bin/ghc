@@ -2,4 +2,4 @@
 
 require 'git-health-check'
 
-GitHealthCheck::Cli::Application.new.execute
+exit GitHealthCheck::Cli::Application.new(ARGV).execute
