@@ -22,7 +22,23 @@ Currently, the gem is best utilised as a post-build step and possibly outside of
 
  A report is generated at `healthcheck/report.html`
 
+ To view a list of available commands:
 
+    $ ghc -h
+
+    Usage: ghc [option]
+
+    Output metrics for your Git repository.
+
+    Examples:
+        ghc
+        ghc -t 10
+        ghc -t 0.2
+
+    Options:
+        -v, --version                    Displays the gem version
+        -h, --help                       Displays this help message
+        -t, --threshold THRESHOLD        Specify history size threshold in MB (default 0.5)
 
 ## Contributing
 
