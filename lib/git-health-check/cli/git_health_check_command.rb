@@ -17,13 +17,13 @@ module GitHealthCheck
         packfile = GitHealthCheck::Packfile.new(@repository)
         packfile.packfile_stats
 
-        working_copy_output = working_copy.fast_find_in_working_copy
+        working_copy_output = working_copy.find_in_working_copy
         history_output = history.search
 
-        working_copy_report = Table("object sha", "size (kB)", "compressed (kB)", "path")
+        working_copy_report = Table("object sha", "size (MB)", "path")
         history_report = Table("object sha", "size (MB)", "path", "commit details", "author")
 
-        working_copy_output.each { |sha, (size, csize, path)| working_copy_report << [sha, size, csize, path] }
+        working_copy_output.each { |sha, size, path| working_copy_report << [sha, size, path] }
         history_output.each { |sha, size, path, where, who| history_report << [sha, size, path, where, who] }
 
         report = GitHealthCheck::Report.new(working_copy_report.to_html, history_report.to_html, packfile)
