@@ -39,14 +39,15 @@
 
       h3 {
           font-size: 16px;
+          padding: 0 0 0 20px;
       }
 
       #history {
-          padding: 0 0 0 20px;
+          padding: 0 0 0 30px;
       }
 
       #working-copy {
-          padding: 0 0 0 20px;
+          padding: 0 0 0 30px;
       }
   </style>
 </head>
@@ -64,11 +65,11 @@
     <li><strong>Total packfile size: </strong>
       <% size = @packfile.size_of_pack[0].to_f %>
       <% if size >= 1048576 %>
-          <%= size / 1048576 %> GB
+          <%= (size / 1048576).round 2 %> GB
       <% elsif size >= 1024 %>
-          <%= size / 1024 %> MB
+          <%= (size / 1024).round 2 %> MB
       <% else %>
-          <%= size %> kB
+          <%= size.round 2 %> kB
       <% end %>
     </li>
   </ul>
@@ -78,24 +79,41 @@
 
   <h2>Repository Size</h2>
 
+  <h3>Working Copy</h3>
+
   <div id="working-copy">
 
-    <h3>Working Copy</h3>
+    <h4>Description</h4>
 
-    <p>This metric inspects your repository's <a href="http://git-scm.com/book/en/Git-Internals-Packfiles">packfile</a>
-      contents via its index to identify the <em>n</em> (default 10) largest objects - and consequently the
-      <strong>largest files</strong> - in your working copy.</p> <br>
+    <p>This metric inspects your repository's working copy using
+      <a href="http://www.kernel.org/pub/software/scm/git/docs/git-ls-files.html">git ls-files</a> to identify the
+      <em>n</em> (default 10) largest objects - and consequently the <strong>largest files</strong>.</p>
+
+    <p>In some cases the same object hash will be displayed for multiple paths. <strong>This is not a bug.</strong>
+      The way git stores <a href="http://git-scm.com/book/en/Git-Internals-Git-Objects">blob objects</a> - i.e. bytes on
+      the filesystem that could be anything (e.g. a text file, source code, an image) - means that if you have
+      <em>exactly</em> the same file in multiple places in your repository - perhaps a static test file - then the
+      report will correctly output <em>all the paths on the filesystem where the object is referenced</em>.</p>
+
+    <h4>Statistics</h4>
 
     <p><%= @working_copy %></p>
 
   </div>
 
+  <br>
+
+  <h3>History</h3>
+
   <div id="history">
-    <h3>History</h3>
+
+    <h4>Description</h4>
 
     <p>This metric thoroughly inspects your repository's history and identifies the largest files over a configurable
-      threshold (defaults at 0.5 MB) that have been committed in the past <strong>but are
-      no longer part of the working copy</strong>.</p> <br>
+      threshold (defaults at 0.5 MB) that have been committed in the past <strong>but are no longer part of the working
+      copy</strong>.</p>
+
+    <h4>Statistics</h4>
 
     <p><%= @history %></p>
   </div>
