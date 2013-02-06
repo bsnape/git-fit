@@ -38,5 +38,13 @@ module GitHealthCheck
       `git count-objects -v`
     end
 
+    def get_largest_files(number=10)
+      `git ls-files -z | xargs -0 ls -l | sort -nrk5 | head -n #{number}`
+    end
+
+    def get_object_sha_from_path(path)
+      `git ls-files -s #{path} | cut -d ' ' -f 2`
+    end
+
   end
 end
