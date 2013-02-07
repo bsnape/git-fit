@@ -46,5 +46,13 @@ module GitHealthCheck
       `git ls-files -s #{path} | cut -d ' ' -f 2`
     end
 
+    def get_revision_list(head='HEAD')
+      `git rev-list #{head}`
+    end
+
+    def get_treeish_contents(treeish)
+      `git ls-tree -zrl #{treeish}`
+    end
+
   end
 end
