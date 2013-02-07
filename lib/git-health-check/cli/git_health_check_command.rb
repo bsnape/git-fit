@@ -12,7 +12,7 @@ module GitHealthCheck
       end
 
       def execute(view)
-        history = GitHealthCheck::History.new(@repository, 'HEAD', @threshold)
+        history = GitHealthCheck::History.new(@repository, @threshold)
         working_copy = GitHealthCheck::WorkingCopy.new @repository
         packfile = GitHealthCheck::Packfile.new(@repository)
         packfile.packfile_stats

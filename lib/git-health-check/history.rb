@@ -7,34 +7,32 @@ module GitHealthCheck
 
     MEGABYTE = 1000 ** 2
 
-    def initialize(repository, head = 'HEAD', threshold = 0.1)
-      @head = head
+    def initialize(repository, threshold)
       @bytes_threshold = threshold.to_f * MEGABYTE
       Dir.chdir repository
       @git_lib = GitHealthCheck::GitLib.new repository
     end
 
     def search
-
+      revision_list = @git_lib.get_revision_list.split "\n"
       big_files = {}
 
-      # list commit objects in chronological order
-      IO.popen("git rev-list #@head", 'r') do |rev_list|
-        rev_list.each_line do |commit|
-          # list contents of the tree object
-          `git ls-tree -zrl #{commit.chomp!}`.split("\0").each do |object|
-            bits, type, sha, size, path = object.split(/\s+/, 5)
-            size = size.to_i
-            big_files[sha] = [path, size, commit] if size >= @bytes_threshold
-          end
+      revision_list.each do |commit|
+        @git_lib.get_treeish_contents(commit).split("\0").each do |object|
+          bits, type, sha, size, path = object.split
+          size = size.to_f
+          big_files[path] = [sha, size, commit] if size >= @bytes_threshold
         end
       end
 
-      big_files.map do |sha, (path, size, commit_sha)|
+      big_files = big_files.map do |path, (sha, size, commit_sha)|
         where = @git_lib.get_commit_details commit_sha
         who = @git_lib.get_commit_author commit_sha
-        [sha, size.to_f / MEGABYTE, path, where, who]
+        [sha, (size / MEGABYTE).round(2), path, where, who]
       end
+
+      big_files.sort_by! { |a| [a[1], a[2]] }.reverse!
+
     end
 
   end
