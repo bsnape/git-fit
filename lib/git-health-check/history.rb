@@ -5,7 +5,7 @@ module GitHealthCheck
 
   class History
 
-    MEGABYTE = 1000 ** 2
+    MEGABYTE = 1024 ** 2
 
     def initialize(repository, threshold)
       @repository = repository
