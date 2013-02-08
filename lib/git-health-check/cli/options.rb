@@ -29,13 +29,13 @@ EOB
       def set_parser_options
         @parser.banner = banner
 
-        @parser.separator "Options:"
+        @parser.separator 'Options:'
 
-        @parser.on("-v", "--version", "Displays the gem version") { @command_class = VersionCommand }
+        @parser.on('-v', '--version', 'Displays the gem version') { @command_class = VersionCommand }
 
-        @parser.on("-h", "--help", "Displays this help message") { @command_class = HelpCommand }
+        @parser.on('-h', '--help', 'Displays this help message') { @command_class = HelpCommand }
 
-        @parser.on("-t", "--threshold THRESHOLD", Float, "Specify history size threshold in MB (default 0.5)") do |n|
+        @parser.on('-t', '--threshold THRESHOLD', Float, 'Specify history size threshold in MB (default 0.5)') do |n|
           @threshold = n
         end
       end

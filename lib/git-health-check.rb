@@ -1,4 +1,4 @@
-require "git-health-check/version"
+require 'git-health-check/version'
 require 'git-health-check/history'
 require 'git-health-check/working_copy'
 require 'git-health-check/report'

@@ -4,20 +4,20 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'git-health-check/version'
 
 Gem::Specification.new do |gem|
-  gem.name = "git-health-check"
+  gem.name = 'git-health-check'
   gem.version = GitHealthCheck::VERSION
-  gem.authors = ["Ben Snape"]
-  gem.email = ["bsnape@gmail.com"]
+  gem.authors = ['Ben Snape']
+  gem.email = ['bsnape@gmail.com']
   gem.description = %q{Git Health Check}
   gem.summary = %q{Git Health Check}
-  gem.homepage = "http://wwww.bensnape.com"
+  gem.homepage = 'http://wwww.bensnape.com'
 
   gem.files = `git ls-files`.split($/)
   gem.executables = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.test_files = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib"]
+  gem.require_paths = ['lib']
 
-  gem.add_dependency("ruport")
-  gem.add_development_dependency("rake")
+  gem.add_dependency('ruport')
+  gem.add_development_dependency('rake')
 
 end

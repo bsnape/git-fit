@@ -8,7 +8,7 @@ module GitHealthCheck
       @working_copy = working_copy
       @history = history
       @packfile = packfile
-      @report_directory = Dir.pwd + "/healthcheck"
+      @report_directory = Dir.pwd + '/healthcheck'
       @repository = Dir.pwd
     end
 
@@ -17,7 +17,7 @@ module GitHealthCheck
     end
 
     def get_template
-      File.read(File.dirname(__FILE__) + "/report/report.erb")
+      File.read(File.dirname(__FILE__) + '/report/report.erb')
     end
 
     def create
@@ -26,7 +26,7 @@ module GitHealthCheck
 
       Dir.mkdir @report_directory unless File.directory? @report_directory
 
-      File.open(@report_directory + "/report.html", "w+") do |f|
+      File.open(@report_directory + '/report.html', 'w+') do |f|
         f.write output
       end
     end
