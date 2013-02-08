@@ -8,6 +8,7 @@ module GitHealthCheck
     MEGABYTE = 1000 ** 2
 
     def initialize(repository, threshold)
+      @repository = repository
       @bytes_threshold = threshold.to_f * MEGABYTE
       Dir.chdir repository
       @git_lib = GitHealthCheck::GitLib.new repository
@@ -20,6 +21,7 @@ module GitHealthCheck
       revision_list.each do |commit|
         @git_lib.get_treeish_contents(commit).split("\0").each do |object|
           bits, type, sha, size, path = object.split
+          next if File.exist?("#@repository/#{path}")
           size = size.to_f
           big_files[path] = [sha, size, commit] if size >= @bytes_threshold
         end
