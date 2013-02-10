@@ -13,27 +13,6 @@ module GitHealthCheck
       `git show -s #{commit_sha} --format='%h: %cr'`.chomp
     end
 
-    def get_pack_number
-      `ls .git/objects/pack/pack-*.idx 2> /dev/null | wc -l`.to_i
-    end
-
-    def get_status
-      `git status`
-    end
-
-    def filesystem_check
-      `git fsck --full --strict`
-    end
-
-    def garbage_collection
-      `git gc`
-    end
-
-    def repack
-      `git repack -a -d -f --depth=250 --window=250` # better than gc --aggressive
-                                                     # http://metalinguist.wordpress.com/2007/12/06/the-woes-of-git-gc-aggressive-and-how-git-deltas-work/
-    end
-
     def count_objects
       `git count-objects -v`
     end
