@@ -29,6 +29,7 @@ Examples:
     ghc --threshold 0.2
     ghc -l 20
     ghc --threshold 5 --limit 20
+    ghc -r projects/my_repo -t 10 -l 30
 
 EOB
       end
@@ -48,6 +49,12 @@ EOB
 
         @parser.on('-l', '--limit LIMIT', Integer, 'Specify working copy results limit (default 10)') do |n|
           @options[:limit] = n
+        end
+
+        @parser.on('-r', '--repository REPOSITORY', String,
+                   'Specify the repository (current directory by default)') do |repo|
+          Dir.chdir repo # handles relative directories
+          @options[:repository] = Dir.pwd
         end
       end
 
