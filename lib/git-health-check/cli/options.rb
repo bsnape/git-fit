@@ -9,7 +9,8 @@ module GitHealthCheck
         @argv = argv
         @options = {
             :threshold => 0.5,
-            :limit => 10
+            :limit => 10,
+            :repository => Dir.pwd
         }
         @parser = OptionParser.new
         @command_class = GitHealthCheckCommand

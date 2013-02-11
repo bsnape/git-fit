@@ -4,12 +4,12 @@ module GitHealthCheck
 
   class Report
 
-    def initialize(working_copy, history, packfile)
+    def initialize(working_copy, history, packfile, options)
       @working_copy = working_copy
       @history = history
       @packfile = packfile
-      @report_directory = Dir.pwd + '/healthcheck'
-      @repository = Dir.pwd
+      @repository = options[:repository]
+      @report_directory = @repository + '/healthcheck'
     end
 
     def get_binding

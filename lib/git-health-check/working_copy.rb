@@ -2,13 +2,13 @@ module GitHealthCheck
 
   class WorkingCopy
 
-    def initialize(repository)
-      @repository = repository
-      @git_lib = GitHealthCheck::GitLib.new repository
+    def initialize(options)
+      @limit = options[:limit]
+      @git_lib = GitHealthCheck::GitLib.new
     end
 
-    def find_in_working_copy(limit)
-      largest_files = @git_lib.get_largest_files limit
+    def find_in_working_copy
+      largest_files = @git_lib.get_largest_files @limit
       largest_files = largest_files.split "\n"
 
       files = []

@@ -1,10 +1,6 @@
 module GitHealthCheck
   class GitLib
 
-    def initialize(repository_path)
-      Dir.chdir repository_path
-    end
-
     def get_commit_author(commit_sha)
       `git log #{commit_sha} -n 1 | grep Author | cut -f 2- -d ' '`.chomp
     end

@@ -7,11 +7,10 @@ module GitHealthCheck
 
     MEGABYTE = 1024 ** 2
 
-    def initialize(repository, threshold)
-      @repository = repository
-      @bytes_threshold = threshold.to_f * MEGABYTE
-      Dir.chdir repository
-      @git_lib = GitHealthCheck::GitLib.new repository
+    def initialize(options)
+      @repository = options[:repository]
+      @bytes_threshold = options[:threshold].to_f * MEGABYTE
+      @git_lib = GitHealthCheck::GitLib.new
     end
 
     def search

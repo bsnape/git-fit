@@ -9,9 +9,8 @@ module GitHealthCheck
     attr_reader :prune_packable
     attr_reader :garbage
 
-    def initialize(repository)
-      @repository = repository
-      @git_lib = GitHealthCheck::GitLib.new repository
+    def initialize
+      @git_lib = GitHealthCheck::GitLib.new
     end
 
     def packfile_stats
