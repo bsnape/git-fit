@@ -5,8 +5,9 @@ module GitHealthCheck
 
     class GitHealthCheckCommand
 
-      def initialize(parser, threshold = 0.5)
-        @threshold = threshold
+      def initialize(parser, options)
+        @threshold = options[:threshold]
+        @limit = options[:limit]
         @parser = parser
         @repository = Dir.pwd
       end
@@ -17,7 +18,7 @@ module GitHealthCheck
         packfile = GitHealthCheck::Packfile.new(@repository)
         packfile.packfile_stats
 
-        working_copy_output = working_copy.find_in_working_copy
+        working_copy_output = working_copy.find_in_working_copy @limit
         history_output = history.search
 
         working_copy_report = Table('object sha', 'size (MB)', 'path')

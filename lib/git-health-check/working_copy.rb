@@ -7,8 +7,8 @@ module GitHealthCheck
       @git_lib = GitHealthCheck::GitLib.new repository
     end
 
-    def find_in_working_copy(number=10)
-      largest_files = @git_lib.get_largest_files number
+    def find_in_working_copy(limit)
+      largest_files = @git_lib.get_largest_files limit
       largest_files = largest_files.split "\n"
 
       files = []
