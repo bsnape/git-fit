@@ -2,6 +2,8 @@
 
 This gem outputs a set of metrics for your Git repository which allows you to monitor its size over its lifetime.
 
+It provides fairly basic but useful details about large files in both your `working copy` as well as in your `history`.
+
 ## Installation
 
 Install the gem:
@@ -10,7 +12,11 @@ Install the gem:
 
 ## Usage
 
-Currently, the gem is best utilised as a post-build step and possibly outside of your push-triggered CI job depending on the size of your repository. Execution should take a couple of seconds for most people but for very large repositories with many thousands of commits - e.g. 1GB+ - it could take 10-15 minutes.
+Currently, the gem is best utilised as a post-build step and possibly outside of your push-triggered CI job depending on
+ the size of your repository.
+
+Execution should take a couple of seconds for most people but for very large repositories
+  with many thousands of commits - e.g. 1GB+ - it could take 10-15 minutes.
 
  To perform a default run (the history threshold is set at 0.5MB):
 
@@ -33,12 +39,17 @@ Currently, the gem is best utilised as a post-build step and possibly outside of
     Examples:
         ghc
         ghc -t 10
-        ghc -t 0.2
+        ghc --threshold 0.2
+        ghc -l 20
+        ghc --threshold 5 --limit 20
+        ghc -r projects/my_repo -t 10 -l 30
 
     Options:
         -v, --version                    Displays the gem version
         -h, --help                       Displays this help message
-        -t, --threshold THRESHOLD        Specify history size threshold in MB (default 0.5)
+        -t, --threshold THRESHOLD        Specify minimum history threshold in MB (default 0.5)
+        -l, --limit LIMIT                Specify working copy results limit (default 10)
+        -r, --repository REPOSITORY      Specify the repository (current directory by default)
 
 ## Contributing
 
@@ -51,7 +62,6 @@ Currently, the gem is best utilised as a post-build step and possibly outside of
 # To Do:
 
 1. add timings
-2. add further CLI arguments (e.g. `-n` for number of results)
 3. improve general logic - especially git_health_check_command.rb
 4. improve reporting - something better than ERB
 5. explore the use of Thor instead of OptionParser
