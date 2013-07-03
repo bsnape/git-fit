@@ -1,10 +1,10 @@
-module GitHealthCheck
+module GitFit
 
   class WorkingCopy
 
     def initialize(options)
       @limit = options[:limit]
-      @git_lib = GitHealthCheck::GitLib.new
+      @git_lib = GitFit::GitLib.new
     end
 
     def find_in_working_copy

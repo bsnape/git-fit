@@ -1,7 +1,7 @@
 # Thanks to mislav
 #
 # http://stackoverflow.com/questions/298314/find-files-in-git-repo-over-x-megabytes-that-dont-exist-in-head
-module GitHealthCheck
+module GitFit
 
   class History
 
@@ -10,7 +10,7 @@ module GitHealthCheck
     def initialize(options)
       @repository = options[:repository]
       @bytes_threshold = options[:threshold].to_f * MEGABYTE
-      @git_lib = GitHealthCheck::GitLib.new
+      @git_lib = GitFit::GitLib.new
     end
 
     def search

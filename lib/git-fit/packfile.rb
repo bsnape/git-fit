@@ -1,4 +1,4 @@
-module GitHealthCheck
+module GitFit
   class Packfile
 
     attr_reader :count
@@ -10,7 +10,7 @@ module GitHealthCheck
     attr_reader :garbage
 
     def initialize
-      @git_lib = GitHealthCheck::GitLib.new
+      @git_lib = GitFit::GitLib.new
     end
 
     def packfile_stats

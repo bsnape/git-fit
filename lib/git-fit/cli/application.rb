@@ -1,4 +1,4 @@
-module GitHealthCheck
+module GitFit
   module Cli
 
     class Application
@@ -7,7 +7,7 @@ module GitHealthCheck
       ERROR = 1
 
       def initialize(argv)
-        @options = GitHealthCheck::Cli::Options.new(argv)
+        @options = GitFit::Cli::Options.new(argv)
         @status = SUCCESS
       end
 

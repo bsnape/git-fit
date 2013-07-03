@@ -1,6 +1,6 @@
 require 'erb'
 
-module GitHealthCheck
+module GitFit
 
   class Report
 
@@ -9,7 +9,7 @@ module GitHealthCheck
       @history = history
       @packfile = packfile
       @repository = options[:repository]
-      @report_directory = @repository + '/healthcheck'
+      @report_directory = @repository + '/git-fit'
     end
 
     def get_binding

@@ -1,4 +1,4 @@
-# Git Health Check
+# Git Fit
 
 This gem outputs a set of metrics for your Git repository which allows you to monitor its size over its lifetime.
 
@@ -8,7 +8,7 @@ It provides fairly basic but useful details about large files in both your `work
 
 Install the gem:
 
-    $ gem install git-health-check
+    $ gem install git-fit
 
 ## Usage
 
@@ -20,29 +20,29 @@ Execution should take a couple of seconds for most people but for very large rep
 
  To perform a default run (the history threshold is set at 0.5MB):
 
-    $ ghc
+    $ gitfit
 
  To specify a threshold value (in MB) on the history reporting:
 
-    $ ghc -t 2
+    $ gitfit -t 2
 
- A report is generated at `healthcheck/report.html`
+ A report is generated at `git-fit/report.html`
 
  To view a list of available commands:
 
-    $ ghc -h
+    $ gitfit -h
 
-    Usage: ghc [option]
+    Usage: gitfit [option]
 
     Output metrics for your Git repository.
 
     Examples:
-        ghc
-        ghc -t 10
-        ghc --threshold 0.2
-        ghc -l 20
-        ghc --threshold 5 --limit 20
-        ghc -r projects/my_repo -t 10 -l 30
+        gitfit
+        gitfit -t 10
+        gitfit --threshold 0.2
+        gitfit -l 20
+        gitfit --threshold 5 --limit 20
+        gitfit -r projects/my_repo -t 10 -l 30
 
     Options:
         -v, --version                    Displays the gem version
@@ -62,7 +62,7 @@ Execution should take a couple of seconds for most people but for very large rep
 # To Do:
 
 1. add timings
-3. improve general logic - especially git_health_check_command.rb
+3. improve general logic - especially git_fit_command.rb
 4. improve reporting - something better than ERB
 5. explore the use of Thor instead of OptionParser
 6. output number of commits - `git shortlog | grep -E '^[ ]+\w+' | wc -l` *or* `git log --pretty=format:'' | wc -l`

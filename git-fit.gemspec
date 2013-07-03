@@ -1,15 +1,15 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'git-health-check/version'
+require 'git-fit/version'
 
 Gem::Specification.new do |gem|
-  gem.name = 'git-health-check'
-  gem.version = GitHealthCheck::VERSION
+  gem.name = 'git-fit'
+  gem.version = GitFit::VERSION
   gem.authors = ['Ben Snape']
   gem.email = ['bsnape@gmail.com']
-  gem.description = %q{Git Health Check}
-  gem.summary = %q{Git Health Check}
+  gem.description = %q{Git Fit}
+  gem.summary = %q{Git Fit}
   gem.homepage = 'http://wwww.bensnape.com'
 
   gem.files = `git ls-files`.split($/)

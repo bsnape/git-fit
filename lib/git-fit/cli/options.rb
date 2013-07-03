@@ -1,6 +1,6 @@
 require 'optparse'
 
-module GitHealthCheck
+module GitFit
   module Cli
 
     class Options
@@ -13,23 +13,23 @@ module GitHealthCheck
             :repository => Dir.pwd
         }
         @parser = OptionParser.new
-        @command_class = GitHealthCheckCommand
+        @command_class = GitFitCommand
         set_parser_options
       end
 
       def banner
         return <<EOB
-Usage: ghc [option]
+Usage: gitfit [option]
 
 Output metrics for your Git repository.
 
 Examples:
-    ghc
-    ghc -t 10
-    ghc --threshold 0.2
-    ghc -l 20
-    ghc --threshold 5 --limit 20
-    ghc -r projects/my_repo -t 10 -l 30
+    gitfit
+    gitfit -t 10
+    gitfit --threshold 0.2
+    gitfit -l 20
+    gitfit --threshold 5 --limit 20
+    gitfit -r projects/my_repo -t 10 -l 30
 
 EOB
       end

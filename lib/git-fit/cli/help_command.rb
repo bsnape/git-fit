@@ -1,7 +1,7 @@
-module GitHealthCheck
+module GitFit
   module Cli
 
-    class HelpCommand < GitHealthCheckCommand
+    class HelpCommand < GitFitCommand
 
       def execute(view)
         view.output(@parser.to_s)

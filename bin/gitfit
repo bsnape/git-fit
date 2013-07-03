@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'git-fit'
+
+exit GitFit::Cli::Application.new(ARGV).execute
