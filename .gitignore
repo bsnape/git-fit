@@ -18,4 +18,5 @@ _yardoc
 doc/
 
 Gemfile.lock
-healthcheck
+/git-fit
+.idea
