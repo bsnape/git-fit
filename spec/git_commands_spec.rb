@@ -9,8 +9,8 @@ describe 'git commands' do
     Dir.chdir @path
   end
 
-  it 'should list all the file paths in the repository for a given treeish' do
-    @git_lib.get_file_list('HEAD').should match_array ['test.txt', 'test/blah/hello.txt']
+  it "should list all the file paths in the repository's working copy" do
+    @git_lib.get_file_list.should match_array ['test.txt', 'test/blah/hello.txt']
   end
 
   it 'should get the commit author for a given commit' do

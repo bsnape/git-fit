@@ -25,8 +25,8 @@ module GitFit
       `git ls-tree -zrl #{treeish}`
     end
 
-    def get_file_list(treeish)
-      `git ls-tree -r --name-only #{treeish}`.split "\n" # could use ls-files but treeishes not supported
+    def get_file_list
+      `git ls-files -z`.split "\u0000"
     end
 
     def get_commit_count_for_branch(branch)
