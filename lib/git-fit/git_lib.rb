@@ -1,12 +1,12 @@
 module GitFit
   class GitLib
 
-    def get_commit_author(commit_sha)
-      `git show -s --format=%an #{commit_sha}`.strip
+    def get_commit_author(commit)
+      `git show -s --format=%an #{commit}`.strip
     end
 
-    def get_commit_date(commit_sha)
-      `git show -s --format=%at #{commit_sha}`.strip.to_i
+    def get_commit_date(commit)
+      `git show -s --format=%at #{commit}`.strip.to_i
     end
 
     def get_largest_files(number=10)
@@ -17,8 +17,8 @@ module GitFit
       `git ls-files -s #{path} | cut -d ' ' -f 2`
     end
 
-    def get_revision_list(treeish='HEAD')
-      `git rev-list #{treeish}`
+    def get_revision_list(commit)
+      `git rev-list #{commit}`.split "\n"
     end
 
     def get_treeish_contents(treeish)
