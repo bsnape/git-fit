@@ -30,7 +30,7 @@ module GitFit
     end
 
     def get_commit_count_for_branch(branch)
-      `git rev-list --branches origin/#{branch} | wc -l`.strip
+      `git rev-list --branches #{branch} | wc -l`.strip.to_i
     end
 
   end

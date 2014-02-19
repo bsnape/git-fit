@@ -27,4 +27,8 @@ describe 'git commands' do
     @git_lib.get_revision_list('HEAD').should match_array expected_revision_list
   end
 
+  it 'should get the commit count for a given branch' do
+    @git_lib.get_commit_count_for_branch('master').should eq 2
+  end
+
 end
