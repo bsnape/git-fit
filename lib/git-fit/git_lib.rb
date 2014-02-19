@@ -5,8 +5,8 @@ module GitFit
       `git show -s --format=%an #{commit_sha}`.strip
     end
 
-    def get_commit_details(commit_sha)
-      `git show -s #{commit_sha} --format='%h: %cr'`.chomp
+    def get_commit_date(commit_sha)
+      `git show -s --format=%at #{commit_sha}`.strip.to_i
     end
 
     def get_largest_files(number=10)
