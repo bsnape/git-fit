@@ -31,4 +31,8 @@ describe 'git commands' do
     @git_lib.get_commit_count_for_branch('master').should eq 2
   end
 
+  it 'should return the size of a file in kilobytes for a given filepath' do
+    @git_lib.get_file_size('test/blah/hello.txt').should eq 0
+  end
+
 end
