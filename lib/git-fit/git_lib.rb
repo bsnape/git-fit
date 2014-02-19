@@ -2,7 +2,7 @@ module GitFit
   class GitLib
 
     def get_commit_author(commit_sha)
-      `git log #{commit_sha} -n 1 | grep Author | cut -f 2- -d ' '`.chomp
+      `git show -s --format=%an #{commit_sha}`.strip
     end
 
     def get_commit_details(commit_sha)
