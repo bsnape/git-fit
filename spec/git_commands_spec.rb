@@ -3,10 +3,12 @@ require_relative 'spec_helper'
 describe 'git commands' do
 
   before(:all) do
-    @path    = File.dirname(__FILE__) + '/fixtures/testrepo.git/'
-    @repo    = Rugged::Repository.new(@path)
+    @git_repo_path    = File.dirname(__FILE__) + '/fixtures/testrepo.git/'
+    @cloned_repo_path = File.dirname(__FILE__) + '/fixtures/testrepo/'
+    FileUtils.rm_rf @cloned_repo_path if Dir.exist? @cloned_repo_path
+    `git clone #{@git_repo_path} #{@cloned_repo_path}`
     @git_lib = GitFit::GitLib.new
-    Dir.chdir @path
+    Dir.chdir @cloned_repo_path
   end
 
   it "should list all the file paths in the repository's working copy" do
@@ -31,8 +33,13 @@ describe 'git commands' do
     @git_lib.get_commit_count_for_branch('master').should eq 2
   end
 
-  it 'should return the size of a file in kilobytes for a given filepath' do
-    @git_lib.get_file_size('test/blah/hello.txt').should eq 0
+  it 'should return the size of a file in bytes for a given filepath' do
+    @git_lib.get_file_size('test/blah/hello.txt').should eq 7
+  end
+
+  it 'should calculate the size of all files in the working copy' do
+    expected_file_sizes = { 2307 => 'test.txt', 7 => 'test/blah/hello.txt' }
+    @git_lib.calculate_file_sizes.should == expected_file_sizes
   end
 
 end

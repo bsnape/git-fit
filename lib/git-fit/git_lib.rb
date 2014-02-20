@@ -9,12 +9,16 @@ module GitFit
       `git show -s --format=%at #{commit}`.strip.to_i
     end
 
-    def get_largest_files(number=10)
-      `git ls-files -z | xargs -0 ls -l | sort -nrk5 | head -n #{number}`
+    def calculate_file_sizes
+      file_sizes = {}
+      get_file_list.each do |filepath|
+        file_sizes.merge!({ get_file_size(filepath) => filepath })
+      end
+      file_sizes
     end
 
     def get_file_size(path)
-      `du -k #{path}`.strip.to_i
+      `wc -c #{path} | awk '{print $1}'`.strip.to_i
     end
 
     def get_object_sha_from_path(path)
