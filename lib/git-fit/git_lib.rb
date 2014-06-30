@@ -26,15 +26,25 @@ module GitFit
     end
 
     def get_revision_list(commit)
-      `git rev-list #{commit}`.split "\n"
+      `git rev-list #{commit}`.split("\n")
     end
 
-    def get_treeish_contents(treeish)
-      `git ls-tree -zrl #{treeish}`
+    def get_commit_contents(treeish)
+      contents       = `git ls-tree -zrl #{treeish}`.split("\0")
+      split_contents = contents.map { |c| c.split(' ') }
+      split_contents.map do |bits, type, sha, size, path|
+        {
+          :bits => bits.to_i,
+          :type => type,
+          :sha  => sha,
+          :size => size.to_i,
+          :path => path
+        }
+      end
     end
 
     def get_file_list
-      `git ls-files -z`.split "\u0000"
+      `git ls-files -z`.split("\u0000")
     end
 
     def get_commit_count_for_branch(branch)

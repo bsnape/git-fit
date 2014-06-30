@@ -42,4 +42,29 @@ describe 'git commands' do
     @git_lib.calculate_file_sizes.should == expected_file_sizes
   end
 
+  it 'should get the contents of a commit object' do
+    commit_object = 'b224a986d123ae3718b1e8762e596b111a4367e0'
+    contents      = @git_lib.get_commit_contents commit_object
+
+    expected_contents =
+      [
+        {
+          :bits => 100644,
+          :type => 'blob',
+          :sha  => 'f75bf694a920ad720982e0d22f72bcc1e240b090',
+          :size => 2307,
+          :path => 'test.txt'
+        },
+        {
+          :bits => 100644,
+          :type => 'blob',
+          :sha  => '9a80a2252780ab97f40ce8292f17fb1447fcb634',
+          :size => 7,
+          :path => 'test/blah/hello.txt'
+        },
+      ]
+
+    contents.should match_array expected_contents
+  end
+
 end
