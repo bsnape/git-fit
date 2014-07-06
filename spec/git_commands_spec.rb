@@ -67,4 +67,9 @@ describe 'git commands' do
     contents.should match_array expected_contents
   end
 
+  # TODO: edge-case where a blob is replaced by a smaller/larger one with the same path
+  it 'should output unique blobs in no particular order' do
+    @git_lib.get_all_blobs.should == { 'test.txt' => 2307, 'test/blah/hello.txt' => 7 }
+  end
+
 end

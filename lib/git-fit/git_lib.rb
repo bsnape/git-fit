@@ -51,5 +51,19 @@ module GitFit
       `git rev-list --branches #{branch} | wc -l`.strip.to_i
     end
 
+    def get_all_blobs
+      output = {}
+
+      get_revision_list('HEAD').each do |commit|
+        get_commit_contents(commit).each do |commit_contents|
+          if commit_contents.fetch(:type) == 'blob'
+            output.merge!(commit_contents.fetch(:path) => commit_contents.fetch(:size))
+          end
+        end
+      end
+
+      output
+    end
+
   end
 end
