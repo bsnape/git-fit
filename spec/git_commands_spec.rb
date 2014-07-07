@@ -11,13 +11,9 @@ describe 'git commands' do
     Dir.chdir @cloned_repo_path
   end
 
-  it 'should get the commit author for a given commit' do
-    @git_lib.get_commit_author('25097b1').should eq 'Ben Snape'
-  end
-
-  it 'should get the UNIX timestamp for a given commit' do
-    expected_time = 1392722405
-    @git_lib.get_commit_date('25097b1').should eq expected_time
+  it 'should get useful stats about a commit' do
+    expected_stats = { :author => 'Ben Snape', :commit_date => 1392722405 }
+    @git_lib.get_commit_statistics('25097b13910521f43a3bbc5236973bcc2a06093b').should == expected_stats
   end
 
   it 'should get the revision list for a given commit' do

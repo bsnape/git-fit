@@ -1,12 +1,9 @@
 module GitFit
   class GitLib
 
-    def get_commit_author(commit)
-      `git show -s --format=%an #{commit}`.strip
-    end
-
-    def get_commit_date(commit)
-      `git show -s --format=%at #{commit}`.strip.to_i
+    def get_commit_statistics(commit)
+      statistics = `git show -s --format="%an-%at" #{commit}`.strip.split('-')
+      { :author => statistics[0], :commit_date => statistics[1].to_i } # TODO seems a bit eurgh
     end
 
     def get_revision_list(commit)
